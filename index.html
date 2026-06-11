@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Актуальный цикл дождя, дня и ночи Throne and Liberty: расписание дождя, таймеры событий, ближайшие интервалы и время сервера Europe/Moscow для региона Россия."
+    />
+    <meta name="google-site-verification" content="22BBFkB-uxITViztwHF7NNiK8HnhPJ6k09uiMSe7YoY" />
+    <meta name="yandex-verification" content="d7f805d580492b51" />
+    <meta name="msvalidate.01" content="6EF42A98DFACC0C12C102965AE8A353C" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#080706" />
+    <link rel="canonical" href="https://futuretl.ru/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content="https://futuretl.ru/" />
+    <meta property="og:title" content="Throne and Liberty: дождь, день и ночь - расписание цикла" />
+    <meta
+      property="og:description"
+      content="Погодный цикл Throne and Liberty для региона Россия: дождь, ночь, день, ближайшие интервалы и таймеры событий с учётом часового пояса посетителя."
+    />
+    <meta property="og:image" content="https://futuretl.ru/assets/future-logo-640.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Throne and Liberty: расписание дождя, дня и ночи" />
+    <meta
+      name="twitter:description"
+      content="Динамический таймер дождя, ночи и дня Throne and Liberty для серверного времени Europe/Moscow."
+    />
+    <title>Throne and Liberty: дождь, день и ночь - расписание цикла</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="preload" as="image" href="assets/future-logo-320.webp" imagesrcset="assets/future-logo-320.webp 320w, assets/future-logo-640.webp 640w" imagesizes="(max-width: 520px) 78vw, clamp(190px, 24vw, 320px)" />
+    <link rel="stylesheet" href="styles.css?v=20260610-1" />
+    <script type="module" src="app.js?v=20260610-4"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Future TL Weather",
+        "alternateName": "Throne and Liberty Weather Cycle Russia",
+        "url": "https://futuretl.ru/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "ru-RU",
+        "description": "Динамическое расписание дождя, дня и ночи Throne and Liberty с таймерами событий, серверным временем Europe/Moscow и подстройкой под часовой пояс посетителя.",
+        "isAccessibleForFree": true,
+        "keywords": "Throne and Liberty, Throne and Liberty дождь, Throne and Liberty ночь, расписание дождя TL, цикл погоды Throne and Liberty, Future TL"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "inLanguage": "ru-RU",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Где посмотреть график дождя в Throne and Liberty Россия?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "На futuretl.ru доступен график дождя Throne and Liberty для региона Россия: ближайшие интервалы дождя, таймер до начала или конца дождя и расписание на 24 часа."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Как отслеживать смену погоды в Throne and Liberty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Сайт показывает смену погоды, день и ночь в Throne and Liberty по серверному циклу Europe/Moscow и автоматически подстраивает время под часовой пояс посетителя."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Есть ли таймер дождя и ночи Throne and Liberty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да, на странице есть таймер дождя, таймер смены фазы день/ночь, лента ближайших 3 часов и список интервалов дождя и ночи на следующие 24 часа."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true">
+      <div class="scene__light"></div>
+      <div class="scene__rain"></div>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Throne and Liberty Weather">
+        <img
+          class="header-logo"
+          src="assets/future-logo-320.webp"
+          srcset="assets/future-logo-320.webp 320w, assets/future-logo-640.webp 640w"
+          sizes="(max-width: 520px) 78vw, clamp(190px, 24vw, 320px)"
+          alt="Future"
+          width="320"
+          height="90"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <span class="brand__tagline">цикл смены состояния мира Throne and Liberty</span>
+      </a>
+      <div class="topbar__meta">
+        <span>Сервер: РУ</span>
+        <span id="visitor-tz">ваш пояс</span>
+        <button class="settings-open" id="settings-open" type="button" aria-label="Открыть настройки" aria-controls="settings-panel" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19.4 13.5c.1-.5.1-1 .1-1.5s0-1-.1-1.5l2-1.5-2-3.5-2.4 1a8.4 8.4 0 0 0-2.6-1.5L14 2h-4l-.4 3a8.4 8.4 0 0 0-2.6 1.5l-2.4-1-2 3.5 2 1.5c-.1.5-.1 1-.1 1.5s0 1 .1 1.5l-2 1.5 2 3.5 2.4-1a8.4 8.4 0 0 0 2.6 1.5l.4 3h4l.4-3a8.4 8.4 0 0 0 2.6-1.5l2.4 1 2-3.5-2-1.5ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z" />
+          </svg>
+          <span>Настройки</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="settings-backdrop" id="settings-backdrop" hidden></div>
+    <aside class="settings-panel" id="settings-panel" aria-labelledby="settings-title" aria-hidden="true">
+      <div class="settings-panel__head">
+        <div>
+          <span class="label">Панель</span>
+          <h2 id="settings-title">Настройки</h2>
+        </div>
+        <button class="settings-close" id="settings-close" type="button" aria-label="Закрыть настройки">×</button>
+      </div>
+
+      <label class="settings-field" for="timezone-select">
+        <span>Часовой пояс</span>
+        <select id="timezone-select">
+          <option value="">Автоопределение</option>
+        </select>
+      </label>
+
+      <div class="settings-row">
+        <div>
+          <strong>Desktop-уведомления</strong>
+          <small id="desktop-note">Видны только если игра запущена в оконном режиме.</small>
+        </div>
+        <button class="settings-switch" id="desktop-toggle" type="button" role="switch" aria-checked="false">
+          <span class="settings-switch__knob"></span>
+        </button>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <strong>Звуковые уведомления</strong>
+          <small>Для начала дня, ночи и дождя на сайте.</small>
+        </div>
+        <button class="settings-switch" id="sound-toggle" type="button" role="switch" aria-checked="false">
+          <span class="settings-switch__knob"></span>
+        </button>
+      </div>
+
+      <label class="settings-field settings-field--volume" for="sound-volume">
+        <span>Громкость <strong id="sound-volume-value">70%</strong></span>
+        <input id="sound-volume" type="range" min="0" max="100" step="1" value="70" />
+      </label>
+    </aside>
+
+    <section
+      class="guild-callout"
+      id="guild-callout"
+      data-announcement-id="future-guild-20260608-recruitment-v2"
+      aria-label="Объявление гильдии Future"
+    >
+      <img
+        class="guild-callout__icon"
+        src="assets/announcement-bell-96.webp"
+        srcset="assets/announcement-bell-96.webp 96w, assets/announcement-bell-160.webp 160w"
+        sizes="(max-width: 520px) 54px, 62px"
+        alt=""
+        width="96"
+        height="96"
+        decoding="async"
+      />
+      <div class="guild-callout__copy">
+        <span class="guild-callout__label">Объявление от гильдии Future / сервер: Джанарот</span>
+        <p class="guild-callout__summary" id="guild-summary">
+          Привет! Нужны обучаемые и мотивированные ребята: хиллеры (лук+ванд) и танки (снс+гс) 2000+ GS
+        </p>
+      </div>
+      <a
+        class="guild-callout__discord"
+        href="https://discord.com/invite/ngsKU2ReY"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19.6 5.2A15.8 15.8 0 0 0 15.7 4l-.2.3c1.4.4 2 .9 2.7 1.5a12.4 12.4 0 0 0-12.4 0c.8-.6 1.5-1.1 2.8-1.5L8.4 4a15.8 15.8 0 0 0-4 1.2C2 8.7 1.4 12.1 1.7 15.5A16 16 0 0 0 6.5 18l1-1.3c-.6-.2-1.2-.5-1.7-.8l.4-.3a11.7 11.7 0 0 0 11.6 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.3a16 16 0 0 0 4.8-2.5c.4-4-.7-7.3-2.7-10.3ZM8.3 13.5c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.7.8 1.6 1.8c0 1-.7 1.8-1.6 1.8Zm7.4 0c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.7.8 1.6 1.8c0 1-.7 1.8-1.6 1.8Z" />
+        </svg>
+        <span>Наш Discord</span>
+      </a>
+      <button class="guild-callout__details-toggle" id="guild-details-toggle" type="button" aria-expanded="false" aria-controls="guild-details">
+        Подробности
+      </button>
+      <button class="guild-callout__close" id="guild-callout-close" type="button" aria-label="Скрыть объявление">
+        ×
+      </button>
+      <div class="guild-callout__details" id="guild-details" hidden>
+        <div class="guild-callout__details-grid">
+          <p class="guild-callout__lead">
+            Мы собираемся стать топ1-3 пвп гильдией сервера, ведём набор способных к обучению игроков.
+            Если вы недавно начали играть - ничего страшного: если у вас есть мотивация драться на
+            высоком уровне, то мы помогаем вам с билдом и игрой. Ваш ПВЕ лут с филд боссов отправляется
+            лично вам. Остальной лут - консул.
+          </p>
+          <div class="guild-callout__requirements">
+            <span class="guild-callout__subhead">От вас</span>
+            <ol>
+              <li>Молодость (в уме, биологически хоть 40+). Не думер, не пивной.</li>
+              <li>80% посещение: вы должны прийти не меньше чем на 8 из 10 праймов.</li>
+              <li>Адаптивность и высокая коммуникация со своим КП.</li>
+            </ol>
+          </div>
+          <p class="guild-callout__statement">
+            Гильдия на пике силы, убиваем топ гильдии и топ пати на сервере.
+          </p>
+          <ul class="guild-callout__perks">
+            <li>Класс коучи</li>
+            <li>Персональные билды</li>
+            <li>Варгеймы</li>
+            <li>Командные тренировки</li>
+            <li>Прогрессивные стратегии</li>
+            <li>Уважение к мемберам</li>
+            <li>TeamSpeak</li>
+          </ul>
+          <p class="guild-callout__pride">
+            Предмет гордости: большинство игроков начали играть 2 недели назад, а сейчас гильдия
+            выбивает китайские альяансы и другие большие таги, играющие с Кореи и Глобала. Если вы
+            сомневаетесь, что у вас получится хорошо играть, имея небольшой опыт, - просто не сомневайтесь.
+          </p>
+          <p class="guild-callout__prime">
+            Прайм: <strong>19:45 - 22:30 по МСК</strong>. При этом гильдия активна в течение всего дня,
+            утром и ночью.
+          </p>
+        </div>
+        <button class="guild-callout__collapse" id="guild-details-collapse" type="button">
+          Свернуть
+        </button>
+      </div>
+    </section>
+
+    <main class="page">
+      <h1 id="hero-title" class="sr-only">Throne and Liberty: расписание дождя, дня и ночи</h1>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <section class="now-panel" aria-label="Текущее состояние">
+          <div class="now-panel__icon">
+            <img
+              id="current-icon"
+              src="assets/icon-day-96.webp"
+              srcset="assets/icon-day-96.webp 96w, assets/icon-day-192.webp 192w"
+              sizes="74px"
+              alt="День"
+              width="96"
+              height="97"
+              decoding="async"
+            />
+          </div>
+          <div>
+            <span class="label">Сейчас</span>
+            <strong id="current-title">Загрузка</strong>
+            <p id="current-subtitle">Расписание обновляется...</p>
+          </div>
+        </section>
+
+        <section class="timeline-card timeline-card--hero" aria-labelledby="timeline-title">
+          <div class="section-head">
+            <div>
+              <span class="label">Ближайшие 3 часа</span>
+              <h2 id="timeline-title">Лента состояния мира</h2>
+            </div>
+            <span class="legend">
+              <i class="legend__day"></i> день <i class="legend__night"></i> ночь <i class="legend__rain"></i> дождь
+            </span>
+          </div>
+          <div class="timeline" id="timeline" role="list" aria-label="Лента ближайших состояний мира"></div>
+          <div class="timeline-axis" id="timeline-axis"></div>
+        </section>
+      </section>
+
+      <section class="command-grid" aria-label="Ключевые таймеры">
+        <article class="metric">
+          <span class="label">До смены погоды</span>
+          <strong id="rain-countdown">--:--</strong>
+          <small id="rain-caption">ожидание данных</small>
+        </article>
+        <article class="metric">
+          <span class="label">До смены фазы</span>
+          <strong id="phase-countdown">--:--</strong>
+          <small id="phase-caption">день / ночь</small>
+        </article>
+        <article class="metric">
+          <span class="label">Текущее время</span>
+          <strong id="visitor-clock">--:--</strong>
+          <small id="visitor-caption">автоопределение</small>
+        </article>
+      </section>
+      <section class="schedule-grid" aria-label="Расписание">
+        <article class="schedule">
+          <div class="section-head">
+            <div>
+              <span class="label">Следующие 24 часа</span>
+              <h2>Дождь</h2>
+            </div>
+            <span class="schedule__count" id="rain-count">0</span>
+          </div>
+          <div class="chips" id="rain-slots"></div>
+        </article>
+
+        <article class="schedule">
+          <div class="section-head">
+            <div>
+              <span class="label">Следующие 24 часа</span>
+              <h2>Ночь</h2>
+            </div>
+            <span class="schedule__count" id="night-count">0</span>
+          </div>
+          <div class="chips" id="night-slots"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="Информация и статистика сайта">
+      <section class="seo-summary" aria-labelledby="seo-title">
+        <h2 id="seo-title">График дождя и смены погоды Throne and Liberty Россия</h2>
+        <p>
+          Future TL показывает график дождя, смену погоды, день и ночь в Throne and Liberty для региона Россия.
+          На странице доступны таймер дождя, ближайшие интервалы, расписание дождя и ночи на 24 часа, а также
+          серверное время Europe/Moscow с подстройкой под часовой пояс посетителя.
+        </p>
+        <p>
+          Используйте сайт как компактный погодный радар Throne and Liberty: когда начнётся дождь, когда закончится
+          дождь, когда будет ночь и когда снова наступит день.
+        </p>
+      </section>
+      <span class="visit-stats" id="visit-stats">визиты: -- / --</span>
+    </footer>
+  </body>
+</html>

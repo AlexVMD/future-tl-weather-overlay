@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future TL Overlay</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="overlay-root" class="overlay overlay--wide" aria-live="polite">
+      <section class="weather-card" id="weather-card">
+        <div class="weather-card__topline">
+          <span id="mode-label">Future TL</span>
+          <span id="clock-label">--:--:--</span>
+        </div>
+
+        <div id="preset-wide" class="preset preset--wide">
+          <div class="timeline timeline--wide" id="wide-timeline"></div>
+          <div class="event-strip" id="wide-events"></div>
+          <div class="status-strip">
+            <span id="wide-rain"></span>
+            <span id="wide-phase"></span>
+            <span id="wide-current"></span>
+          </div>
+        </div>
+
+        <div id="preset-compact" class="preset preset--compact">
+          <div class="boundary-row" id="compact-boundaries"></div>
+          <div class="timeline timeline--compact" id="compact-timeline"></div>
+        </div>
+
+        <div id="preset-focus" class="preset preset--focus">
+          <article class="rain-card rain-card--embedded" id="focus-event"></article>
+          <div class="focus-side">
+            <div class="timeline timeline--mini" id="focus-timeline"></div>
+            <div class="tick-row" id="focus-ticks"></div>
+            <div class="focus-caption" id="focus-caption"></div>
+            <div class="detail-list" id="focus-details"></div>
+          </div>
+        </div>
+
+        <div id="preset-rain" class="preset preset--rain">
+          <article class="rain-card" id="rain-card"></article>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./renderer.js"></script>
+  </body>
+</html>

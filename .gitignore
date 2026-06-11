@@ -1,0 +1,11 @@
+node_modules/
+.superpowers/
+release/
+npm-debug.log*
+output/
+dist/
+docs/superpowers/
+futuretl-site.zip
+*.log
+.env
+.env.*

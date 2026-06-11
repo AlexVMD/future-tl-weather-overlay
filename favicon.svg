@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="T and L weather">
+  <rect width="64" height="64" fill="#080706"/>
+  <path fill="#d9b66d" d="M31 8h2l2 18 13 3-13 3-2 24h-2l-2-24-13-3 13-3z"/>
+  <path fill="#62b7ff" d="M18 46c0-5 4-9 9-9 2 0 4 .6 5.5 1.7A8 8 0 0 1 48 42c4 0 7 3 7 7s-3 7-7 7H23c-3 0-5-2-5-5z" opacity=".9"/>
+</svg>

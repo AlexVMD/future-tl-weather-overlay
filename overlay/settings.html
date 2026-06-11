@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future TL Overlay Settings</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="settings-body">
+    <main class="settings-window">
+      <section class="edit-panel edit-panel--standalone">
+        <div class="edit-panel__header">
+          <strong>Future TL Overlay</strong>
+          <span>Ctrl+Shift+W - закрыть</span>
+        </div>
+        <p class="edit-panel__hint">Ленту можно двигать отдельно: наведитесь на саму ленту и перетащите её мышью.</p>
+        <label>
+          Дизайн
+          <select id="preset-select">
+            <option value="wide">Стандартная</option>
+            <option value="compact">Компактная</option>
+            <option value="focus">Подробная</option>
+            <option value="rain">Дождь</option>
+          </select>
+        </label>
+        <label>
+          Ширина
+          <input id="width-input" type="range" min="520" max="980" step="20" />
+        </label>
+        <label>
+          Прозрачность
+          <input id="opacity-input" type="range" min="35" max="100" step="5" />
+        </label>
+        <label>
+          Масштаб
+          <input id="scale-input" type="range" min="80" max="125" step="5" />
+        </label>
+        <footer class="settings-about">
+          <p>
+            Подробная информация о смене циклов погоды -
+            <a href="https://futuretl.ru/" data-external-link>futuretl.ru</a>
+          </p>
+          <p>
+            Проект разработан при поддержке<br />
+            Гильдии <strong>"FUTURE"</strong> | Сервер <strong>"Джанарот"</strong>
+          </p>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./settings-renderer.js"></script>
+  </body>
+</html>

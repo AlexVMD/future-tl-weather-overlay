@@ -1,0 +1,51 @@
+{
+  "name": "future-tl-weather-overlay",
+  "version": "0.1.0",
+  "description": "Standalone weather overlay for Future TL.",
+  "type": "module",
+  "main": "overlay/main.js",
+  "scripts": {
+    "test": "node --test weather-engine.test.js overlay/overlay-model.test.js overlay/window-metrics.test.js",
+    "overlay": "electron overlay/main.js",
+    "overlay:check": "node --check overlay/main.js && node --check overlay/preload.js && node --check overlay/renderer.js && node --check overlay/settings-renderer.js && node --check overlay/overlay-model.js && node --check overlay/window-metrics.js",
+    "package:win": "electron-builder --win nsis portable --x64",
+    "package:portable": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^42.4.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "ru.futuretl.weather-overlay",
+    "productName": "Future TL Weather Overlay",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "overlay/*.html",
+      "overlay/*.css",
+      "overlay/*.js",
+      "!overlay/*.test.js",
+      "weather-engine.js",
+      "favicon.ico",
+      "package.json"
+    ],
+    "win": {
+      "icon": "favicon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Future TL Weather Overlay"
+    },
+    "portable": {
+      "artifactName": "Future-TL-Weather-Overlay-Portable-${version}.${ext}"
+    }
+  }
+}
