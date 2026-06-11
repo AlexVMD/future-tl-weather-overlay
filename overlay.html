@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Future TL Weather Overlay: отдельное окно поверх игры Throne and Liberty с компактной информацией о дожде, дне, ночи и ближайших сменах погоды."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#080706" />
+    <link rel="canonical" href="https://futuretl.ru/overlay.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content="https://futuretl.ru/overlay.html" />
+    <meta property="og:title" content="Future TL Weather Overlay - оверлей погоды для игры" />
+    <meta
+      property="og:description"
+      content="Компактный overlay поверх Throne and Liberty: дождь, день, ночь, ближайшие события, пресеты вида и обновления через GitHub Releases."
+    />
+    <meta property="og:image" content="https://futuretl.ru/assets/overlay-preset-detailed.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Future TL Weather Overlay - оверлей погоды для игры</title>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="preload" as="image" href="assets/future-logo-320.webp" imagesrcset="assets/future-logo-320.webp 320w, assets/future-logo-640.webp 640w" imagesizes="(max-width: 520px) 78vw, clamp(190px, 24vw, 320px)" />
+    <link rel="preload" as="image" href="assets/overlay-preset-detailed.png" />
+    <link rel="stylesheet" href="styles.css?v=20260611-2" />
+  </head>
+  <body class="overlay-page">
+    <div class="scene" aria-hidden="true">
+      <div class="scene__light"></div>
+      <div class="scene__rain"></div>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Future TL Weather">
+        <img
+          class="header-logo"
+          src="assets/future-logo-320.webp"
+          srcset="assets/future-logo-320.webp 320w, assets/future-logo-640.webp 640w"
+          sizes="(max-width: 520px) 78vw, clamp(190px, 24vw, 320px)"
+          alt="Future"
+          width="320"
+          height="90"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <span class="brand__tagline">цикл смены состояния мира Throne and Liberty</span>
+      </a>
+      <div class="topbar__meta">
+        <a class="topbar-link" href="/">На главную</a>
+        <span>Сервер: РУ</span>
+      </div>
+    </header>
+
+    <main class="overlay-landing">
+      <section class="overlay-hero" aria-labelledby="overlay-title">
+        <div class="overlay-hero__copy">
+          <span class="label">Future TL Weather Overlay</span>
+          <h1 id="overlay-title">Погода поверх игры</h1>
+          <p>
+            Компактное окно поверх Throne and Liberty показывает ближайший дождь,
+            день, ночь и смену фаз без переключения на браузер.
+          </p>
+          <div class="overlay-actions" aria-label="Скачать overlay">
+            <a class="overlay-action overlay-action--primary" href="https://github.com/AlexVMD/future-tl-weather-overlay/releases/latest" target="_blank" rel="noopener noreferrer">
+              Скачать с установкой
+            </a>
+            <a class="overlay-action" href="https://github.com/AlexVMD/future-tl-weather-overlay/releases/latest" target="_blank" rel="noopener noreferrer">
+              Portable версия
+            </a>
+            <a class="overlay-action overlay-action--ghost" href="/">Вернуться на главную</a>
+          </div>
+        </div>
+        <figure class="overlay-hero__visual">
+          <img
+            src="assets/overlay-preset-detailed.png"
+            alt="Подробный пресет Future TL Weather Overlay"
+            width="860"
+            height="200"
+            decoding="async"
+          />
+          <figcaption>Подробная лента: ближайший дождь, будущие события и таймеры.</figcaption>
+        </figure>
+      </section>
+
+      <section class="overlay-feature-band" aria-label="Основные возможности">
+        <div>
+          <span class="label">В игре</span>
+          <strong>Не мешает управлению</strong>
+          <p>В обычном режиме окно пропускает клики мыши и остаётся поверх игры.</p>
+        </div>
+        <div>
+          <span class="label">Погода</span>
+          <strong>Дождь, день и ночь</strong>
+          <p>Показывает начало и окончание ближайших фаз в понятном формате.</p>
+        </div>
+        <div>
+          <span class="label">Настройки</span>
+          <strong>Размер и shortcut</strong>
+          <p>Можно менять пресет, ширину, масштаб, прозрачность и горячую клавишу.</p>
+        </div>
+        <div>
+          <span class="label">Обновления</span>
+          <strong>Через GitHub</strong>
+          <p>Новая версия предлагается прямо в настройках overlay.</p>
+        </div>
+      </section>
+
+      <section class="overlay-presets" aria-labelledby="presets-title">
+        <div class="section-head">
+          <div>
+            <span class="label">Пресеты</span>
+            <h2 id="presets-title">Выберите вид под свой экран</h2>
+          </div>
+          <p class="overlay-presets__note">Все варианты читаемы на фоне игры и настраиваются по ширине, масштабу и прозрачности.</p>
+        </div>
+
+        <div class="overlay-preset-list">
+          <article class="overlay-preset overlay-preset--wide">
+            <img src="assets/overlay-preset-standard.png" alt="Стандартный пресет overlay" width="704" height="162" loading="lazy" decoding="async" />
+            <div>
+              <h3>Стандартная</h3>
+              <p>Широкая лента с иконками, интервалами и ближайшими событиями.</p>
+            </div>
+          </article>
+          <article class="overlay-preset overlay-preset--wide">
+            <img src="assets/overlay-preset-compact.png" alt="Компактный пресет overlay" width="620" height="116" loading="lazy" decoding="async" />
+            <div>
+              <h3>Компактная</h3>
+              <p>Узкая лента с отметками смены фаз и минимальным местом на экране.</p>
+            </div>
+          </article>
+          <article class="overlay-preset overlay-preset--wide">
+            <img src="assets/overlay-preset-detailed.png" alt="Подробный пресет overlay" width="860" height="200" loading="lazy" decoding="async" />
+            <div>
+              <h3>Подробная</h3>
+              <p>Больше контекста: ближайший дождь, события и короткие статусы.</p>
+            </div>
+          </article>
+          <article class="overlay-preset overlay-preset--rain">
+            <img src="assets/overlay-preset-rain.png" alt="Пресет дождя overlay" width="172" height="184" loading="lazy" decoding="async" />
+            <div>
+              <h3>Дождь</h3>
+              <p>Небольшой блок только о ближайшем дожде и времени до начала или конца.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="overlay-safe" aria-labelledby="safe-title">
+        <div>
+          <span class="label">Безопасный формат</span>
+          <h2 id="safe-title">Отдельное приложение, не модификация игры</h2>
+        </div>
+        <ul>
+          <li>Не меняет файлы игры.</li>
+          <li>Не читает память игры.</li>
+          <li>Не внедряется в процесс игры.</li>
+          <li>Закрывается само после завершения Throne and Liberty.</li>
+        </ul>
+      </section>
+
+      <section class="overlay-final-cta" aria-label="Скачать Future TL Weather Overlay">
+        <h2>Скачайте последнюю версию</h2>
+        <p>На странице релиза доступны установщик и portable-файл. Выберите удобный вариант и запустите overlay перед игрой или во время игры.</p>
+        <div class="overlay-actions">
+          <a class="overlay-action overlay-action--primary" href="https://github.com/AlexVMD/future-tl-weather-overlay/releases/latest" target="_blank" rel="noopener noreferrer">
+            Открыть релиз на GitHub
+          </a>
+          <a class="overlay-action overlay-action--ghost" href="/">На главную страницу</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="Информация сайта">
+      <section class="seo-summary">
+        <h2>Future TL Weather Overlay</h2>
+        <p>
+          Overlay помогает отслеживать погодный цикл Throne and Liberty прямо поверх игры:
+          дождь, ночь, день, ближайшие интервалы и смену фаз.
+        </p>
+      </section>
+    </footer>
+  </body>
+</html>
