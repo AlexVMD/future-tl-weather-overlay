@@ -148,6 +148,72 @@ body.is-editing .weather-card {
   accent-color: var(--rain-b);
 }
 
+.settings-update {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.42);
+  color: #cbd5e1;
+  font-size: 12px;
+  line-height: 1.35;
+  -webkit-app-region: no-drag;
+}
+
+.settings-update__header,
+.settings-update__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.settings-update__header strong {
+  color: var(--text);
+}
+
+.settings-update__header span {
+  color: var(--muted);
+  font: 800 11px ui-monospace, Consolas, monospace;
+}
+
+.settings-update p {
+  min-height: 17px;
+  margin: 7px 0 9px;
+  overflow: hidden;
+  color: #94a3b8;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-update button {
+  min-width: 96px;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid rgba(125, 211, 252, 0.32);
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e5e7eb;
+  font: 800 11px Inter, "Segoe UI", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.settings-update button:hover:not(:disabled) {
+  border-color: rgba(125, 211, 252, 0.64);
+  background: rgba(14, 116, 144, 0.42);
+}
+
+.settings-update button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+#update-install-button {
+  border-color: rgba(125, 211, 252, 0.68);
+  background: linear-gradient(135deg, #0e7490, #0369a1);
+  color: #f8fafc;
+}
+
 .settings-about {
   margin-top: 18px;
   padding: 12px;

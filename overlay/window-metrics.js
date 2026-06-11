@@ -4,7 +4,7 @@ const FOCUS_HEIGHT = 230;
 const RAIN_WINDOW_WIDTH = 148;
 const RAIN_WINDOW_HEIGHT = 168;
 const SETTINGS_WIDTH = 430;
-const SETTINGS_HEIGHT = 390;
+const SETTINGS_HEIGHT = 500;
 
 export function computeOverlayWindowSize(settings = {}, editMode = false) {
   const width = Number.isFinite(Number(settings.width)) ? Number(settings.width) : 820;

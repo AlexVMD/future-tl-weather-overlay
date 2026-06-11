@@ -35,6 +35,17 @@
           Масштаб
           <input id="scale-input" type="range" min="80" max="125" step="5" />
         </label>
+        <section class="settings-update">
+          <div class="settings-update__header">
+            <strong>Обновления</strong>
+            <span id="update-version">v--</span>
+          </div>
+          <p id="update-status">Проверка обновлений...</p>
+          <div class="settings-update__actions">
+            <button id="update-check-button" type="button">Проверить</button>
+            <button id="update-install-button" type="button" hidden>ОБНОВИТЬ</button>
+          </div>
+        </section>
         <footer class="settings-about">
           <p>
             Подробная информация о смене циклов погоды -

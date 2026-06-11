@@ -1,9 +1,11 @@
 import { app, BrowserWindow, Menu, globalShortcut, ipcMain, screen, shell } from "electron";
+import electronUpdater from "electron-updater";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createGameProcessMonitor, queryGameProcessRunning } from "./game-process-monitor.js";
 import { DEFAULT_OVERLAY_SETTINGS, normalizeOverlaySettings } from "./overlay-model.js";
+import { createUpdateController } from "./update-controller.js";
 import { computeOverlayWindowSize, computeSettingsWindowSize } from "./window-metrics.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -16,6 +18,7 @@ let editMode = false;
 let isHidden = false;
 let currentSettings = DEFAULT_OVERLAY_SETTINGS;
 let gameProcessMonitor = null;
+let updateController = null;
 
 function settingsPath() {
   return path.join(app.getPath("userData"), SETTINGS_FILE);
@@ -177,6 +180,22 @@ function startGameProcessMonitor() {
   gameProcessMonitor.start();
 }
 
+function startUpdateController() {
+  const { autoUpdater } = electronUpdater;
+  updateController = createUpdateController({
+    updater: autoUpdater,
+    currentVersion: app.getVersion(),
+    isPackaged: app.isPackaged,
+    onStatus: (status) => broadcast("update-status-changed", status),
+    onBeforeInstall: () => {
+      app.isQuitting = true;
+      gameProcessMonitor?.stop();
+      globalShortcut.unregisterAll();
+    },
+  });
+  setTimeout(() => updateController?.checkForUpdates(), 5000);
+}
+
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
 
@@ -193,6 +212,9 @@ app.whenReady().then(() => {
     }
   });
   ipcMain.handle("edit-mode:get", () => editMode);
+  ipcMain.handle("update:get-status", () => updateController?.getStatus());
+  ipcMain.handle("update:check", () => updateController?.checkForUpdates());
+  ipcMain.handle("update:install", () => updateController?.installUpdate());
 
   createOverlayWindow();
   createSettingsWindow();
@@ -200,6 +222,7 @@ app.whenReady().then(() => {
   globalShortcut.register("CommandOrControl+Shift+W", toggleEditMode);
   globalShortcut.register("CommandOrControl+Shift+H", toggleHidden);
   startGameProcessMonitor();
+  startUpdateController();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
