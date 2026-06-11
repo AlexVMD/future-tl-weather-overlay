@@ -2,6 +2,7 @@ import { app, BrowserWindow, Menu, globalShortcut, ipcMain, screen, shell } from
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createGameProcessMonitor, queryGameProcessRunning } from "./game-process-monitor.js";
 import { DEFAULT_OVERLAY_SETTINGS, normalizeOverlaySettings } from "./overlay-model.js";
 import { computeOverlayWindowSize, computeSettingsWindowSize } from "./window-metrics.js";
 
@@ -14,6 +15,7 @@ let settingsWindow = null;
 let editMode = false;
 let isHidden = false;
 let currentSettings = DEFAULT_OVERLAY_SETTINGS;
+let gameProcessMonitor = null;
 
 function settingsPath() {
   return path.join(app.getPath("userData"), SETTINGS_FILE);
@@ -164,6 +166,17 @@ function showSettingsWindow() {
   settingsWindow.webContents.send("settings-changed", currentSettings);
 }
 
+function startGameProcessMonitor() {
+  gameProcessMonitor = createGameProcessMonitor({
+    checkGameRunning: queryGameProcessRunning,
+    onGameClosed: () => {
+      app.isQuitting = true;
+      app.quit();
+    },
+  });
+  gameProcessMonitor.start();
+}
+
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
 
@@ -186,6 +199,7 @@ app.whenReady().then(() => {
 
   globalShortcut.register("CommandOrControl+Shift+W", toggleEditMode);
   globalShortcut.register("CommandOrControl+Shift+H", toggleHidden);
+  startGameProcessMonitor();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -197,6 +211,7 @@ app.whenReady().then(() => {
 
 app.on("will-quit", () => {
   app.isQuitting = true;
+  gameProcessMonitor?.stop();
   globalShortcut.unregisterAll();
 });
 

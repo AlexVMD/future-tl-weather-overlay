@@ -4,8 +4,8 @@
 
 Запустите один из файлов из папки `release`:
 
-- `Future-TL-Weather-Overlay-Portable-0.1.0.exe` — portable-версия, установка не нужна.
-- `Future TL Weather Overlay Setup 0.1.0.exe` — установщик Windows.
+- `Future-TL-Weather-Overlay-Portable-0.1.1.exe` — portable-версия, установка не нужна.
+- `Future TL Weather Overlay Setup 0.1.1.exe` — установщик Windows.
 
 ## Управление
 
@@ -13,6 +13,7 @@
 - `Ctrl+Shift+H` — скрыть или показать overlay.
 - В режиме настроек ленту можно перетащить мышью.
 - Когда настройки закрыты, overlay работает в click-through режиме и не мешает управлению в игре.
+- Если игра уже запускалась и процесс `TL` завершился, overlay полностью закрывается автоматически.
 
 ## Важно
 
