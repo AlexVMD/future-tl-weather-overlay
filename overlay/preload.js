@@ -4,6 +4,7 @@ contextBridge.exposeInMainWorld("futureOverlay", {
   getSettings: () => ipcRenderer.invoke("settings:get"),
   setSettings: (settings) => ipcRenderer.invoke("settings:set", settings),
   openExternal: (url) => ipcRenderer.invoke("open-external", url),
+  quitOverlay: () => ipcRenderer.invoke("overlay:quit"),
   getEditMode: () => ipcRenderer.invoke("edit-mode:get"),
   getUpdateStatus: () => ipcRenderer.invoke("update:get-status"),
   checkForUpdates: () => ipcRenderer.invoke("update:check"),

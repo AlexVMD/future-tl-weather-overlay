@@ -1,10 +1,19 @@
 import { DEFAULT_OVERLAY_SETTINGS, normalizeOverlaySettings } from "./overlay-model.js";
+import {
+  DEFAULT_SETTINGS_SHORTCUT,
+  formatShortcut,
+  shortcutFromKeyboardEvent,
+} from "./shortcut-utils.js";
 
 const nodes = {
   presetSelect: document.querySelector("#preset-select"),
   widthInput: document.querySelector("#width-input"),
   opacityInput: document.querySelector("#opacity-input"),
   scaleInput: document.querySelector("#scale-input"),
+  settingsShortcutHint: document.querySelector("#settings-shortcut-hint"),
+  shortcutCaptureButton: document.querySelector("#shortcut-capture-button"),
+  shortcutResetButton: document.querySelector("#shortcut-reset-button"),
+  overlayQuitButton: document.querySelector("#overlay-quit-button"),
   updateVersion: document.querySelector("#update-version"),
   updateStatus: document.querySelector("#update-status"),
   updateCheckButton: document.querySelector("#update-check-button"),
@@ -12,12 +21,17 @@ const nodes = {
 };
 
 let settings = normalizeOverlaySettings(DEFAULT_OVERLAY_SETTINGS);
+let isCapturingShortcut = false;
 
 function applySettingsToDom() {
   nodes.presetSelect.value = settings.preset;
   nodes.widthInput.value = String(settings.width);
   nodes.opacityInput.value = String(Math.round(settings.opacity * 100));
   nodes.scaleInput.value = String(Math.round(settings.scale * 100));
+  nodes.shortcutCaptureButton.textContent = isCapturingShortcut
+    ? "Нажмите комбинацию..."
+    : formatShortcut(settings.settingsShortcut);
+  nodes.settingsShortcutHint.textContent = formatShortcut(settings.settingsShortcut);
 }
 
 async function saveSettings(nextSettings) {
@@ -31,6 +45,30 @@ function bindControls() {
   nodes.widthInput.addEventListener("input", () => saveSettings({ width: Number(nodes.widthInput.value) }));
   nodes.opacityInput.addEventListener("input", () => saveSettings({ opacity: Number(nodes.opacityInput.value) / 100 }));
   nodes.scaleInput.addEventListener("input", () => saveSettings({ scale: Number(nodes.scaleInput.value) / 100 }));
+  nodes.shortcutCaptureButton.addEventListener("click", () => {
+    isCapturingShortcut = true;
+    applySettingsToDom();
+    nodes.shortcutCaptureButton.focus();
+  });
+  nodes.shortcutResetButton.addEventListener("click", () => {
+    isCapturingShortcut = false;
+    saveSettings({ settingsShortcut: DEFAULT_SETTINGS_SHORTCUT });
+  });
+  nodes.overlayQuitButton.addEventListener("click", () => window.futureOverlay?.quitOverlay());
+  window.addEventListener("keydown", (event) => {
+    if (!isCapturingShortcut) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.key === "Escape") {
+      isCapturingShortcut = false;
+      applySettingsToDom();
+      return;
+    }
+    const shortcut = shortcutFromKeyboardEvent(event);
+    if (!shortcut) return;
+    isCapturingShortcut = false;
+    saveSettings({ settingsShortcut: shortcut });
+  });
   nodes.updateCheckButton.addEventListener("click", () => window.futureOverlay?.checkForUpdates());
   nodes.updateInstallButton.addEventListener("click", () => window.futureOverlay?.installUpdate());
 

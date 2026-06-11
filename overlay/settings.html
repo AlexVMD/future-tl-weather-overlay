@@ -11,7 +11,7 @@
       <section class="edit-panel edit-panel--standalone">
         <div class="edit-panel__header">
           <strong>Future TL Overlay</strong>
-          <span>Ctrl+Shift+W - закрыть</span>
+          <span><b id="settings-shortcut-hint">Ctrl + Shift + W</b> - закрыть</span>
         </div>
         <p class="edit-panel__hint">Ленту можно двигать отдельно: наведитесь на саму ленту и перетащите её мышью.</p>
         <label>
@@ -35,6 +35,14 @@
           Масштаб
           <input id="scale-input" type="range" min="80" max="125" step="5" />
         </label>
+        <label class="shortcut-field">
+          Настройки
+          <span class="shortcut-field__controls">
+            <button id="shortcut-capture-button" type="button">Ctrl + Shift + W</button>
+            <button id="shortcut-reset-button" type="button" title="Вернуть стандартную комбинацию">Сброс</button>
+          </span>
+        </label>
+        <button class="overlay-power-button" id="overlay-quit-button" type="button">ВЫКЛЮЧИТЬ ОВЕРЛЕЙ</button>
         <section class="settings-update">
           <div class="settings-update__header">
             <strong>Обновления</strong>

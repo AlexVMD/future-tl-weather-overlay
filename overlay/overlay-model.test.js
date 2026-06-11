@@ -101,6 +101,12 @@ test("normalizes overlay settings with readable bounds", () => {
   assert.equal(settings.opacity, 1);
   assert.equal(settings.scale, 0.8);
   assert.equal(settings.displayTimeZone, "Europe/Moscow");
+  assert.equal(settings.settingsShortcut, "Ctrl+Shift+W");
+});
+
+test("normalizes settings shortcut", () => {
+  assert.equal(normalizeOverlaySettings({ settingsShortcut: "Alt+F8" }).settingsShortcut, "Alt+F8");
+  assert.equal(normalizeOverlaySettings({ settingsShortcut: "W" }).settingsShortcut, "Ctrl+Shift+W");
 });
 
 test("wide preset keeps icons above readable time labels", () => {

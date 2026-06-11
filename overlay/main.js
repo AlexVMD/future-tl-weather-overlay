@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createGameProcessMonitor, queryGameProcessRunning } from "./game-process-monitor.js";
 import { DEFAULT_OVERLAY_SETTINGS, normalizeOverlaySettings } from "./overlay-model.js";
+import { DEFAULT_SETTINGS_SHORTCUT, HIDE_OVERLAY_SHORTCUT } from "./shortcut-utils.js";
 import { createUpdateController } from "./update-controller.js";
 import { computeOverlayWindowSize, computeSettingsWindowSize } from "./window-metrics.js";
 
@@ -37,6 +38,11 @@ function writeSettings(settings) {
   currentSettings = normalizeOverlaySettings(settings);
   fs.mkdirSync(app.getPath("userData"), { recursive: true });
   fs.writeFileSync(settingsPath(), JSON.stringify(currentSettings, null, 2));
+}
+
+function quitOverlay() {
+  app.isQuitting = true;
+  app.quit();
 }
 
 function resizeOverlayWindow() {
@@ -196,16 +202,31 @@ function startUpdateController() {
   setTimeout(() => updateController?.checkForUpdates(), 5000);
 }
 
+function registerGlobalShortcuts() {
+  globalShortcut.unregisterAll();
+  const settingsShortcut = currentSettings.settingsShortcut || DEFAULT_SETTINGS_SHORTCUT;
+  const registeredSettingsShortcut = globalShortcut.register(settingsShortcut, toggleEditMode);
+  if (!registeredSettingsShortcut && settingsShortcut !== DEFAULT_SETTINGS_SHORTCUT) {
+    globalShortcut.register(DEFAULT_SETTINGS_SHORTCUT, toggleEditMode);
+  }
+  if (settingsShortcut !== HIDE_OVERLAY_SHORTCUT) {
+    globalShortcut.register(HIDE_OVERLAY_SHORTCUT, toggleHidden);
+  }
+}
+
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
+  currentSettings = readSettings();
 
   ipcMain.handle("settings:get", () => readSettings());
   ipcMain.handle("settings:set", (_event, settings) => {
     writeSettings(settings);
     resizeOverlayWindow();
+    registerGlobalShortcuts();
     broadcast("settings-changed", currentSettings);
     return true;
   });
+  ipcMain.handle("overlay:quit", quitOverlay);
   ipcMain.handle("open-external", (_event, url) => {
     if (typeof url === "string" && url.startsWith("https://futuretl.ru/")) {
       shell.openExternal(url);
@@ -219,8 +240,7 @@ app.whenReady().then(() => {
   createOverlayWindow();
   createSettingsWindow();
 
-  globalShortcut.register("CommandOrControl+Shift+W", toggleEditMode);
-  globalShortcut.register("CommandOrControl+Shift+H", toggleHidden);
+  registerGlobalShortcuts();
   startGameProcessMonitor();
   startUpdateController();
 

@@ -131,6 +131,11 @@ body.is-editing .weather-card {
   color: var(--muted);
 }
 
+.edit-panel__header b {
+  color: #cbd5e1;
+  font: inherit;
+}
+
 .edit-panel label {
   display: grid;
   grid-template-columns: 92px 1fr;
@@ -146,6 +151,46 @@ body.is-editing .weather-card {
 .edit-panel input {
   width: 100%;
   accent-color: var(--rain-b);
+}
+
+.shortcut-field__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 6px;
+}
+
+.shortcut-field button,
+.overlay-power-button,
+.settings-update button {
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid rgba(125, 211, 252, 0.32);
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e5e7eb;
+  font: 800 11px Inter, "Segoe UI", system-ui, sans-serif;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.shortcut-field button:hover:not(:disabled),
+.settings-update button:hover:not(:disabled) {
+  border-color: rgba(125, 211, 252, 0.64);
+  background: rgba(14, 116, 144, 0.42);
+}
+
+.overlay-power-button {
+  width: 100%;
+  margin-top: 12px;
+  border-color: rgba(248, 113, 113, 0.46);
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.76), rgba(69, 10, 10, 0.72));
+  color: #fee2e2;
+  letter-spacing: 0;
+}
+
+.overlay-power-button:hover {
+  border-color: rgba(252, 165, 165, 0.7);
+  background: linear-gradient(135deg, rgba(153, 27, 27, 0.86), rgba(127, 29, 29, 0.78));
 }
 
 .settings-update {
@@ -184,23 +229,6 @@ body.is-editing .weather-card {
   color: #94a3b8;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.settings-update button {
-  min-width: 96px;
-  height: 28px;
-  padding: 0 12px;
-  border: 1px solid rgba(125, 211, 252, 0.32);
-  border-radius: 6px;
-  background: rgba(15, 23, 42, 0.72);
-  color: #e5e7eb;
-  font: 800 11px Inter, "Segoe UI", system-ui, sans-serif;
-  cursor: pointer;
-}
-
-.settings-update button:hover:not(:disabled) {
-  border-color: rgba(125, 211, 252, 0.64);
-  background: rgba(14, 116, 144, 0.42);
 }
 
 .settings-update button:disabled {

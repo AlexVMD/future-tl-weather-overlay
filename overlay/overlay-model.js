@@ -1,3 +1,5 @@
+import { DEFAULT_SETTINGS_SHORTCUT, normalizeSettingsShortcut } from "./shortcut-utils.js";
+
 const PRESETS = new Set(["wide", "compact", "focus", "rain"]);
 const MIN_WIDTH = 520;
 const MAX_WIDTH = 980;
@@ -16,6 +18,7 @@ export const DEFAULT_OVERLAY_SETTINGS = {
   opacity: 0.92,
   scale: 1,
   displayTimeZone: "",
+  settingsShortcut: DEFAULT_SETTINGS_SHORTCUT,
 };
 
 function clamp(value, min, max) {
@@ -60,6 +63,7 @@ export function normalizeOverlaySettings(settings = {}) {
     opacity: normalizeNumber(settings.opacity, DEFAULT_OVERLAY_SETTINGS.opacity, MIN_OPACITY, MAX_OPACITY),
     scale: normalizeNumber(settings.scale, DEFAULT_OVERLAY_SETTINGS.scale, MIN_SCALE, MAX_SCALE),
     displayTimeZone: typeof settings.displayTimeZone === "string" ? settings.displayTimeZone : "",
+    settingsShortcut: normalizeSettingsShortcut(settings.settingsShortcut),
   };
 }
 
