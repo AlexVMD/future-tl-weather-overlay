@@ -9,3 +9,14 @@ futuretl-site.zip
 *.log
 .env
 .env.*
+
+# Website files are deployed directly to hosting, not through this overlay repo.
+.htaccess
+app.js
+assets/
+counter.php
+index.html
+overlay.html
+robots.txt
+sitemap.xml
+styles.css

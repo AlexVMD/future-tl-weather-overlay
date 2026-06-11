@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /.counter-data/
-Disallow: /counter.php
-
-Sitemap: https://futuretl.ru/sitemap.xml
