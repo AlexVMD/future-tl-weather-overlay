@@ -109,6 +109,16 @@ test("normalizes settings shortcut", () => {
   assert.equal(normalizeOverlaySettings({ settingsShortcut: "W" }).settingsShortcut, "Ctrl+Shift+W");
 });
 
+test("normalizes sound notification preferences", () => {
+  assert.equal(DEFAULT_OVERLAY_SETTINGS.soundNotificationsEnabled, false);
+  assert.equal(DEFAULT_OVERLAY_SETTINGS.soundVolume, 0.7);
+  assert.equal(normalizeOverlaySettings({ soundNotificationsEnabled: true }).soundNotificationsEnabled, true);
+  assert.equal(normalizeOverlaySettings({ soundNotificationsEnabled: "true" }).soundNotificationsEnabled, false);
+  assert.equal(normalizeOverlaySettings({ soundVolume: 2 }).soundVolume, 1);
+  assert.equal(normalizeOverlaySettings({ soundVolume: -1 }).soundVolume, 0);
+  assert.equal(normalizeOverlaySettings({ soundVolume: "0.45" }).soundVolume, 0.45);
+});
+
 test("wide preset keeps icons above readable time labels", () => {
   const model = buildOverlayViewModel(sampleWeather, {
     preset: "wide",

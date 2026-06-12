@@ -35,6 +35,20 @@
           Масштаб
           <input id="scale-input" type="range" min="80" max="125" step="5" />
         </label>
+        <section class="sound-settings">
+          <label class="sound-settings__toggle">
+            <span>
+              <strong>Звуковые уведомления</strong>
+              <small>За 5 минут до дождя и смены дня или ночи</small>
+            </span>
+            <input id="sound-enabled-input" type="checkbox" />
+          </label>
+          <label class="sound-settings__volume">
+            <span>Громкость</span>
+            <input id="sound-volume-input" type="range" min="0" max="100" step="5" />
+            <output id="sound-volume-value" for="sound-volume-input">70%</output>
+          </label>
+        </section>
         <label class="shortcut-field">
           Настройки
           <span class="shortcut-field__controls">

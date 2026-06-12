@@ -13,6 +13,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const APP_ICON_PATH = path.join(__dirname, "..", "favicon.ico");
 const SETTINGS_FILE = "overlay-settings.json";
 
+app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+
 let overlayWindow = null;
 let settingsWindow = null;
 let editMode = false;

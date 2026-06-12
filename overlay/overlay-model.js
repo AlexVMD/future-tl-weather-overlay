@@ -17,6 +17,8 @@ export const DEFAULT_OVERLAY_SETTINGS = {
   width: 820,
   opacity: 0.92,
   scale: 1,
+  soundNotificationsEnabled: false,
+  soundVolume: 0.7,
   displayTimeZone: "",
   settingsShortcut: DEFAULT_SETTINGS_SHORTCUT,
 };
@@ -62,6 +64,8 @@ export function normalizeOverlaySettings(settings = {}) {
     width: normalizeNumber(settings.width, DEFAULT_OVERLAY_SETTINGS.width, MIN_WIDTH, MAX_WIDTH),
     opacity: normalizeNumber(settings.opacity, DEFAULT_OVERLAY_SETTINGS.opacity, MIN_OPACITY, MAX_OPACITY),
     scale: normalizeNumber(settings.scale, DEFAULT_OVERLAY_SETTINGS.scale, MIN_SCALE, MAX_SCALE),
+    soundNotificationsEnabled: settings.soundNotificationsEnabled === true,
+    soundVolume: normalizeNumber(settings.soundVolume, DEFAULT_OVERLAY_SETTINGS.soundVolume, 0, 1),
     displayTimeZone: typeof settings.displayTimeZone === "string" ? settings.displayTimeZone : "",
     settingsShortcut: normalizeSettingsShortcut(settings.settingsShortcut),
   };

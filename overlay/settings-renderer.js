@@ -10,6 +10,9 @@ const nodes = {
   widthInput: document.querySelector("#width-input"),
   opacityInput: document.querySelector("#opacity-input"),
   scaleInput: document.querySelector("#scale-input"),
+  soundEnabledInput: document.querySelector("#sound-enabled-input"),
+  soundVolumeInput: document.querySelector("#sound-volume-input"),
+  soundVolumeValue: document.querySelector("#sound-volume-value"),
   settingsShortcutHint: document.querySelector("#settings-shortcut-hint"),
   shortcutCaptureButton: document.querySelector("#shortcut-capture-button"),
   shortcutResetButton: document.querySelector("#shortcut-reset-button"),
@@ -28,6 +31,10 @@ function applySettingsToDom() {
   nodes.widthInput.value = String(settings.width);
   nodes.opacityInput.value = String(Math.round(settings.opacity * 100));
   nodes.scaleInput.value = String(Math.round(settings.scale * 100));
+  nodes.soundEnabledInput.checked = settings.soundNotificationsEnabled;
+  nodes.soundVolumeInput.value = String(Math.round(settings.soundVolume * 100));
+  nodes.soundVolumeInput.disabled = !settings.soundNotificationsEnabled;
+  nodes.soundVolumeValue.textContent = `${Math.round(settings.soundVolume * 100)}%`;
   nodes.shortcutCaptureButton.textContent = isCapturingShortcut
     ? "Нажмите комбинацию..."
     : formatShortcut(settings.settingsShortcut);
@@ -45,6 +52,12 @@ function bindControls() {
   nodes.widthInput.addEventListener("input", () => saveSettings({ width: Number(nodes.widthInput.value) }));
   nodes.opacityInput.addEventListener("input", () => saveSettings({ opacity: Number(nodes.opacityInput.value) / 100 }));
   nodes.scaleInput.addEventListener("input", () => saveSettings({ scale: Number(nodes.scaleInput.value) / 100 }));
+  nodes.soundEnabledInput.addEventListener("change", () => {
+    saveSettings({ soundNotificationsEnabled: nodes.soundEnabledInput.checked });
+  });
+  nodes.soundVolumeInput.addEventListener("input", () => {
+    saveSettings({ soundVolume: Number(nodes.soundVolumeInput.value) / 100 });
+  });
   nodes.shortcutCaptureButton.addEventListener("click", () => {
     isCapturingShortcut = true;
     applySettingsToDom();

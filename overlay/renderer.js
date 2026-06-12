@@ -1,5 +1,12 @@
 import { computeWeather } from "../weather-engine.js";
 import { DEFAULT_OVERLAY_SETTINGS, buildOverlayViewModel, normalizeOverlaySettings } from "./overlay-model.js";
+import { createSoundNotificationTracker } from "./sound-notifications.js";
+
+const ALERT_SOUNDS = {
+  day: "../assets/sound-day.mp3",
+  night: "../assets/sound-night.mp3",
+  rain: "../assets/sound-rain.mp3",
+};
 
 const nodes = {
   root: document.querySelector("#overlay-root"),
@@ -23,6 +30,27 @@ const nodes = {
 
 let settings = normalizeOverlaySettings(DEFAULT_OVERLAY_SETTINGS);
 let editMode = false;
+const soundNotificationTracker = createSoundNotificationTracker();
+const alertAudio = {};
+
+function getAlertAudio(soundKey) {
+  if (!ALERT_SOUNDS[soundKey]) return null;
+  alertAudio[soundKey] ||= new Audio(ALERT_SOUNDS[soundKey]);
+  alertAudio[soundKey].preload = "auto";
+  return alertAudio[soundKey];
+}
+
+function playAlertSound(soundKey) {
+  if (!settings.soundNotificationsEnabled || !soundKey) return;
+
+  const audio = getAlertAudio(soundKey);
+  if (!audio) return;
+
+  audio.pause();
+  audio.currentTime = 0;
+  audio.volume = settings.soundVolume;
+  audio.play().catch(() => {});
+}
 
 function iconText(icon) {
   if (icon === "rain") return "🌧";
@@ -175,6 +203,7 @@ function render() {
     timelineHours: 3,
   });
   const model = buildOverlayViewModel(weather, settings);
+  soundNotificationTracker.collect(weather).forEach((event) => playAlertSound(event.soundKey));
 
   nodes.modeLabel.textContent = editMode ? "режим настройки" : `Future TL · ${model.current.displayTimeZoneLabel}`;
   nodes.clockLabel.textContent = model.current.clock;

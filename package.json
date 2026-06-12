@@ -1,13 +1,13 @@
 {
   "name": "future-tl-weather-overlay",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Standalone weather overlay for Future TL.",
   "type": "module",
   "main": "overlay/main.js",
   "scripts": {
-    "test": "node --test weather-engine.test.js overlay/overlay-model.test.js overlay/window-metrics.test.js overlay/game-process-monitor.test.js overlay/update-controller.test.js overlay/shortcut-utils.test.js",
+    "test": "node --test weather-engine.test.js overlay/overlay-model.test.js overlay/sound-notifications.test.js overlay/window-metrics.test.js overlay/game-process-monitor.test.js overlay/update-controller.test.js overlay/shortcut-utils.test.js",
     "overlay": "electron overlay/main.js",
-    "overlay:check": "node --check overlay/main.js && node --check overlay/preload.js && node --check overlay/renderer.js && node --check overlay/settings-renderer.js && node --check overlay/overlay-model.js && node --check overlay/window-metrics.js && node --check overlay/game-process-monitor.js && node --check overlay/update-controller.js && node --check overlay/shortcut-utils.js",
+    "overlay:check": "node --check overlay/main.js && node --check overlay/preload.js && node --check overlay/renderer.js && node --check overlay/settings-renderer.js && node --check overlay/overlay-model.js && node --check overlay/sound-notifications.js && node --check overlay/window-metrics.js && node --check overlay/game-process-monitor.js && node --check overlay/update-controller.js && node --check overlay/shortcut-utils.js",
     "package:win": "electron-builder --win nsis portable --x64",
     "package:portable": "electron-builder --win portable --x64"
   },
@@ -36,6 +36,7 @@
       "overlay/*.css",
       "overlay/*.js",
       "!overlay/*.test.js",
+      "assets/sound-*.mp3",
       "weather-engine.js",
       "favicon.ico",
       "package.json",
