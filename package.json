@@ -1,6 +1,6 @@
 {
   "name": "future-tl-weather-overlay",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Standalone weather overlay for Future TL.",
   "type": "module",
   "main": "overlay/main.js",

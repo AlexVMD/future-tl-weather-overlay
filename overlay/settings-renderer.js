@@ -26,6 +26,13 @@ const nodes = {
 let settings = normalizeOverlaySettings(DEFAULT_OVERLAY_SETTINGS);
 let isCapturingShortcut = false;
 
+function updateSettingsOverflow() {
+  const panel = document.querySelector(".edit-panel--standalone");
+  if (!panel) return;
+  const contentHeight = panel.scrollHeight + 16;
+  document.body.classList.toggle("is-scrollable", contentHeight > window.innerHeight);
+}
+
 function applySettingsToDom() {
   nodes.presetSelect.value = settings.preset;
   nodes.widthInput.value = String(settings.width);
@@ -39,6 +46,7 @@ function applySettingsToDom() {
     ? "Нажмите комбинацию..."
     : formatShortcut(settings.settingsShortcut);
   nodes.settingsShortcutHint.textContent = formatShortcut(settings.settingsShortcut);
+  requestAnimationFrame(updateSettingsOverflow);
 }
 
 async function saveSettings(nextSettings) {
@@ -127,6 +135,10 @@ async function init() {
     applySettingsToDom();
   });
   window.futureOverlay?.onUpdateStatusChanged(renderUpdateStatus);
+  window.addEventListener("resize", updateSettingsOverflow);
+  const panel = document.querySelector(".edit-panel--standalone");
+  if (panel) new ResizeObserver(updateSettingsOverflow).observe(panel);
+  requestAnimationFrame(updateSettingsOverflow);
 }
 
 init();

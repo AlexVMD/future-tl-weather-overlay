@@ -4,7 +4,9 @@ const FOCUS_HEIGHT = 230;
 const RAIN_WINDOW_WIDTH = 148;
 const RAIN_WINDOW_HEIGHT = 168;
 const SETTINGS_WIDTH = 430;
-const SETTINGS_HEIGHT = 570;
+const SETTINGS_HEIGHT = 640;
+const SETTINGS_SCREEN_MARGIN = 48;
+const SETTINGS_MIN_HEIGHT = 320;
 
 export function computeOverlayWindowSize(settings = {}, editMode = false) {
   const width = Number.isFinite(Number(settings.width)) ? Number(settings.width) : 820;
@@ -23,9 +25,14 @@ export function computeOverlayWindowSize(settings = {}, editMode = false) {
   };
 }
 
-export function computeSettingsWindowSize() {
+export function computeSettingsWindowSize(workAreaHeight = Number.POSITIVE_INFINITY) {
+  const availableHeight = Number(workAreaHeight);
+  const height = Number.isFinite(availableHeight)
+    ? Math.max(SETTINGS_MIN_HEIGHT, Math.min(SETTINGS_HEIGHT, Math.floor(availableHeight - SETTINGS_SCREEN_MARGIN)))
+    : SETTINGS_HEIGHT;
+
   return {
     width: SETTINGS_WIDTH,
-    height: SETTINGS_HEIGHT,
+    height,
   };
 }

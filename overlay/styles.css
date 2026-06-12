@@ -771,11 +771,21 @@ body.is-editing .weather-card {
 }
 
 .settings-body {
+  overflow-y: hidden;
   background: rgba(8, 7, 12, 0.96);
+}
+
+.settings-body.is-scrollable {
+  overflow-y: auto;
 }
 
 .settings-window {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 8px;
+}
+
+.settings-window .edit-panel--standalone {
+  height: auto;
+  min-height: calc(100vh - 16px);
 }

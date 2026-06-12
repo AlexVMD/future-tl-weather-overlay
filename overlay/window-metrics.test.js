@@ -41,6 +41,13 @@ test("rain preset uses a compact tall overlay window", () => {
 test("settings window has its own stable size", () => {
   assert.deepEqual(
     computeSettingsWindowSize(),
-    { width: 430, height: 570 },
+    { width: 430, height: 640 },
+  );
+});
+
+test("settings window fits smaller work areas without clipping off-screen", () => {
+  assert.deepEqual(
+    computeSettingsWindowSize(560),
+    { width: 430, height: 512 },
   );
 });

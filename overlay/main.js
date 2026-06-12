@@ -127,13 +127,14 @@ function createOverlayWindow() {
 function createSettingsWindow() {
   const display = screen.getPrimaryDisplay();
   const workArea = display.workArea;
-  const size = computeSettingsWindowSize();
+  const size = computeSettingsWindowSize(workArea.height);
+  const centeredY = workArea.y + Math.floor((workArea.height - size.height) / 2);
 
   settingsWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
     x: workArea.x + 48,
-    y: workArea.y + 240,
+    y: Math.max(workArea.y + 24, centeredY),
     frame: true,
     transparent: false,
     resizable: false,
